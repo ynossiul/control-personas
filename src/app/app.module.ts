@@ -10,6 +10,7 @@ import {ClienteServicio} from './servicios/cliente.service';
 import {LoginService} from 'src/app/servicios/login.service';
 import {AuthGuard} from 'src/app/guardianes/authguard';
 import {ConfiguracionServicio} from './servicios/configuracion.service';
+import {ConfiguracionGuard} from 'src/app/guardianes/configuracionguard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { PiePaginaComponent } from './componetes/pie-pagina/pie-pagina.component
   providers: [ClienteServicio,
     LoginService,
     AuthGuard,
+    ConfiguracionGuard,
     ConfiguracionServicio,
     {provide:FirestoreSettingsToken,useValue:{}}
   ],
