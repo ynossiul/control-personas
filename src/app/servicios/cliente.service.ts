@@ -28,6 +28,38 @@ export class ClienteServicio {
     return this.clientes;
   }
 
+  agregarCliente(cliente:Cliente){
+    this.clientesColleccion.add(cliente);
+  }
+
+  getCliente(id: string){
+    this.clienteDoc=this.db.doc<Cliente>('Clientes/'+id);
+    this.cliente=this.clienteDoc.snapshotChanges().pipe(
+      map(accion=>{
+        if(accion.payload.exists===false){
+          return null;
+        }
+        else{
+          const datos=accion.payload.data() as Cliente;
+          datos.id=accion.payload.id;
+          return datos;
+        }
+      })
+    );
+    return this.cliente;
+  }
+
+  modificarCliente(cliente:Cliente){
+    this.clienteDoc= this.db.doc('Clientes/'+cliente.id);
+    this.clienteDoc.update(cliente);
+
+  }
+
+  eliminarCliente(cliente:Cliente){
+    this.clienteDoc=this.db.doc('Clientes/'+cliente.id);
+    this.clienteDoc.delete();
+  }
+
 
 
 

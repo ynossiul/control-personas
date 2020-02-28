@@ -7,7 +7,9 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {FormsModule} from '@angular/forms';
 import {ClienteServicio} from './servicios/cliente.service';
-
+import {LoginService} from 'src/app/servicios/login.service';
+import {AuthGuard} from 'src/app/guardianes/authguard';
+import {ConfiguracionServicio} from './servicios/configuracion.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { RegistroComponent } from './componetes/registro/registro.component';
 import { ConfiguracionComponent } from './componetes/configuracion/configuracion.component';
 import { NoEncontradoComponent } from './componetes/no-encontrado/no-encontrado.component';
 import { PiePaginaComponent } from './componetes/pie-pagina/pie-pagina.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +46,12 @@ import { PiePaginaComponent } from './componetes/pie-pagina/pie-pagina.component
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ClienteServicio],
+  providers: [ClienteServicio,
+    LoginService,
+    AuthGuard,
+    ConfiguracionServicio,
+    {provide:FirestoreSettingsToken,useValue:{}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
